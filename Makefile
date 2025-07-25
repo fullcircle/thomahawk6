@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for tomahawk6
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -X backup -I/mnt/d/omnetpp-6.2.0/inet4.5/src -L/mnt/d/omnetpp-6.2.0/inet4.5/src -lINET_dbg
+#  opp_makemake -f --deep -X backup -I/mnt/d/omnetpp-6.2.0/inet4.5/src -L/mnt/d/omnetpp-6.2.0/inet4.5/src -lINET
 #
 
 # Name of target to be created (-o option)
@@ -23,7 +23,7 @@ INCLUDE_PATH = -I/mnt/d/omnetpp-6.2.0/inet4.5/src
 EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS = $(LDFLAG_LIBPATH)/mnt/d/omnetpp-6.2.0/inet4.5/src  -lINET_dbg
+LIBS = $(LDFLAG_LIBPATH)/mnt/d/omnetpp-6.2.0/inet4.5/src  -lINET
 
 # Output directory
 PROJECT_OUTPUT_DIR = out

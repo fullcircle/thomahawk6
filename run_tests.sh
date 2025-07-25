@@ -41,7 +41,7 @@ echo ""
 echo "Building Tomahawk 6 simulation..."
 if [ ! -f Makefile.local ]; then
     echo "Generating makefile..."
-    $OMNETPP_ROOT/bin/opp_makemake -f --deep -I$INET_PROJ/src -L$INET_PROJ/src -lINET
+    $OMNETPP_ROOT/bin/opp_makemake -f --deep -X backup -I$INET_PROJ/src -L$INET_PROJ/src -lINET
 fi
 
 make -j$(nproc)

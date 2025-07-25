@@ -1,33 +1,35 @@
-file 2609401 1753465881                                         
+file 365654 1753465874                                          
 version 3
-run HighLoadTest-0-20250725-13:51:21-17079
-attr configname HighLoadTest
-attr datetime 20250725-13:51:21
-attr datetimef 20250725-135121
-attr experiment HighLoadTest
+run AIInferenceWorkload-0-20250725-13:51:14-17066
+attr configname AIInferenceWorkload
+attr datetime 20250725-13:51:14
+attr datetimef 20250725-135114
+attr experiment AIInferenceWorkload
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network AdvancedTomahawk6Network
-attr processid 17079
+attr processid 17066
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
-config output-scalar-file results/benchmark.sca
-config sim-time-limit 5s
-config description "High load stress test"
-config **.trafficGen[*].trafficIntensity 0.95
-config **.trafficGen[*].burstSize 10MiB
-config **.trafficGen[*].burstInterval 0.5ms
+config output-scalar-file results/AIInferenceWorkload_validation.sca
+config sim-time-limit 1s
+config description "AI inference workload simulation"
+config **.trafficGen[*].workloadType "\"P2P\""
+config **.trafficGen[*].tensorSize 10MiB
+config **.trafficGen[*].batchSize 1
+config **.trafficGen[*].numGPUs 16
+config **.trafficGen[*].trafficIntensity 0.7
 config network AdvancedTomahawk6Network
 config sim-time-limit 10s
 config seed-set 0
-config output-vector-file results/HighLoadTest-0.vec
-config output-scalar-file results/HighLoadTest-0.sca
+config output-vector-file results/AIInferenceWorkload-0.vec
+config output-scalar-file results/AIInferenceWorkload-0.sca
 config result-dir results
 config **.switch[*].portConfiguration "\"512x200G\""
 config **.switch[*].serdesConfiguration "\"128x106_25G_PAM4\""
@@ -68,18 +70,18 @@ vector 2 AdvancedTomahawk6Network.sink[1] Latency ETV
 vector 3 AdvancedTomahawk6Network.sink[2] Latency ETV
 vector 4 AdvancedTomahawk6Network.sink[1] Throughput ETV
 vector 5 AdvancedTomahawk6Network.sink[3] Latency ETV
-vector 6 AdvancedTomahawk6Network.sink[2] Throughput ETV
-vector 7 AdvancedTomahawk6Network.sink[0] Latency ETV
+vector 6 AdvancedTomahawk6Network.sink[0] Latency ETV
+vector 7 AdvancedTomahawk6Network.sink[2] Throughput ETV
 vector 8 AdvancedTomahawk6Network.sink[0] Throughput ETV
 vector 9 AdvancedTomahawk6Network.sink[3] Throughput ETV
-0	2901 471396 2 57261 0.005939321521 4.999434970118 19088 0 0 0 0
-1	474297 755548 2 57261 0.005939321521 4.999434970118 19088 0.026307718726379 0.44733654070359 8344.4103785809 3652.3214097767
-2	1229845 158440 3 57249 0.006095571521 4.997654860272 4701 0.00015625 0.00015625 0.73453124999999 0.00011477050781249
-3	1388285 163289 6 57262 0.006413726548 4.999513095118 4845 7.8125e-05 7.8125e-05 0.37851562499999 2.9571533203123e-05
-4	1551574 181422 9 57249 0.007067385344 4.997654860272 4700 1384377924.4322 7.41083285904e+14 1.4354398303618e+15 5.6791874505076e+29
-5	1732996 162007 12 57264 0.007592954285 4.999588346488 4808 0.00015625 0.00015625 0.75124999999998 0.00011738281249999
-6	1895003 186913 20 57262 0.008467984796 4.999513095118 4844 738834160.55112 1.0070379870841e+14 4.1462610269758e+14 1.1644231628623e+28
-7	2081916 159452 24 57254 0.008676516697 4.998211628252 4734 7.8125e-05 7.8125e-05 0.36984374999999 2.8894042968748e-05
-8	2241368 182542 27 57254 0.009187177922 4.998211628252 4733 710466965.8094 1.3408564318201e+14 4.5516900204614e+14 1.9784842538554e+28
-9	2423910 185490 38 57264 0.009570811184 4.999588346488 4807 1450649981.0854 2.4505959849435e+14 1.0398635338627e+15 1.0528723915763e+29
+0	3042 64895 2 8192 0.005939321521 0.999831268172 2731 0 0 0 0
+1	67937 105550 2 8192 0.005939321521 0.999831268172 2731 0.026307718726379 0.3254690248724 856.33589907006 269.99645908972
+2	173487 23461 3 8184 0.006095571521 0.997372728754 716 0.00015625 0.00015625 0.111875 1.748046875e-05
+3	196948 23028 6 8190 0.006413726548 0.998916480653 703 7.8125e-05 7.8125e-05 0.054921874999999 4.2907714843751e-06
+4	219976 26942 9 8184 0.007414461709 0.997372728754 715 1771485404.5805 1.9759971672105e+14 2.6748935031943e+14 3.9364292139131e+28
+5	246918 21396 12 8187 0.007592954285 0.998731825724 653 0.00015625 0.00015625 0.10203125 1.59423828125e-05
+6	268314 21590 18 8193 0.008676516697 0.999909393172 659 7.8125e-05 7.8125e-05 0.051484374999999 4.0222167968751e-06
+7	289904 26429 23 8190 0.009201648456 0.998916480653 702 638796675.14217 3950517524116.5 28801911460495 3.2669764472889e+25
+8	316333 24777 30 8193 0.010072240163 0.999909393172 658 808342102.91825 90285562399602 1.1102841728671e+14 8.1787290918058e+27
+9	341110 24543 33 8187 0.010277188648 0.998731825724 652 1765277382.9723 20027660602611 84693684288052 9.0459640272454e+26
 
