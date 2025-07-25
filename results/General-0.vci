@@ -1,0 +1,79 @@
+file 4423181 1753461938                                         
+version 3
+run General-0-20250725-12:45:37-15459
+attr configname General
+attr datetime 20250725-12:45:37
+attr datetimef 20250725-124537
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network AdvancedTomahawk6Network
+attr processid 15459
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network AdvancedTomahawk6Network
+config sim-time-limit 10s
+config seed-set 0
+config output-vector-file results/General-0.vec
+config output-scalar-file results/General-0.sca
+config result-dir results
+config **.switch[*].portConfiguration "\"512x200G\""
+config **.switch[*].serdesConfiguration "\"128x106_25G_PAM4\""
+config **.switch[*].switchingCapacity 102.4Tbps
+config **.switch[*].numPorts 512
+config **.switch[*].bufferSize 64MiB
+config **.switch[*].queuesPerPort 8
+config **.serdes[*].dataRate 106.25Gbps
+config **.serdes[*].latency 50ns
+config **.packetBuffer[*].numQueues 8
+config **.packetBuffer[*].bufferSize 64MiB
+config **.packetBuffer[*].schedulingAlgorithm "\"WRR\""
+config **.packetBuffer[*].aiPriorityQueues 4
+config **.packetBuffer[*].rocevSupport true
+config **.packetBuffer[*].adaptiveBuffering true
+config **.cognitiveRouter.adaptiveRouting true
+config **.cognitiveRouter.congestionControl true
+config **.cognitiveRouter.loadBalancing true
+config **.cognitiveRouter.routingLatency 50ns
+config **.cognitiveRouter.advancedTelemetry true
+config **.cognitiveRouter.dynamicCongestionControl true
+config **.cognitiveRouter.rapidFailureDetection true
+config **.cognitiveRouter.packetTrimming true
+config **.trafficGen[*].workloadType "\"AllReduce\""
+config **.trafficGen[*].trafficIntensity 0.8
+config **.trafficGen[*].burstSize 1MiB
+config **.trafficGen[*].burstInterval 1ms
+config **.trafficGen[*].rocevProtocol true
+config **.trafficGen[*].flowSize 10MiB
+config **.trafficGen[*].tensorSize 100MiB
+config **.trafficGen[*].batchSize 64
+config **.trafficGen[*].numGPUs 8
+config **.trafficGen[*].computeToCommRatio 10.0
+
+vector 0 AdvancedTomahawk6Network.switch "Queue Length" ETV
+vector 1 AdvancedTomahawk6Network.switch "Port Utilization" ETV
+vector 2 AdvancedTomahawk6Network.sink[1] Latency ETV
+vector 3 AdvancedTomahawk6Network.sink[2] Latency ETV
+vector 4 AdvancedTomahawk6Network.sink[1] Throughput ETV
+vector 5 AdvancedTomahawk6Network.sink[3] Latency ETV
+vector 6 AdvancedTomahawk6Network.sink[0] Latency ETV
+vector 7 AdvancedTomahawk6Network.sink[2] Throughput ETV
+vector 8 AdvancedTomahawk6Network.sink[0] Throughput ETV
+vector 9 AdvancedTomahawk6Network.sink[3] Throughput ETV
+0	2630 800137 2 96895 0.005939321521 9.999798663093 32299 0 0 0 0
+1	802767 1281114 2 96895 0.005939321521 9.999798663093 32299 0.026307718726379 0.37841540651275 11992.697897929 4456.3646873558
+2	2083881 267841 3 96897 0.006095571521 9.999954913093 7931 0.00015625 0.00015625 1.2392187500001 0.00019362792968748
+3	2351722 270234 6 96870 0.006413726548 9.995660820917 8001 7.8125e-05 7.8125e-05 0.62507812500003 4.8834228515621e-05
+4	2621956 306574 9 96897 0.007249600435 9.999954913093 7930 1165791936.2933 6.2405144180845e+14 2.1767880172888e+15 6.0540420791067e+29
+5	2928530 274394 12 96896 0.007592954285 9.999904400549 8125 0.00015625 0.00015625 1.2695312500001 0.00019836425781248
+6	3202924 278358 18 96891 0.008676516697 9.999666832271 8242 7.8125e-05 7.8125e-05 0.64390625000004 5.0305175781245e-05
+7	3481282 309284 23 96870 0.008853158218 9.995660820917 8000 598287971.21364 1.5581372157958e+15 2.2415194885768e+15 2.456684014711e+30
+8	3790566 318569 32 96891 0.00989777473 9.999666832271 8241 622176135.19784 33470571602389 4.6943512844146e+14 2.7974327660368e+27
+9	4109135 314045 33 96896 0.009941659353 9.999904400549 8124 1228085568.1614 2.0636597767946e+14 1.3973482261203e+15 9.6877929157863e+28
+

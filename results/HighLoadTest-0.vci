@@ -1,0 +1,85 @@
+file 5266568 1753463781                                         
+version 3
+run HighLoadTest-0-20250725-13:16:20-15872
+attr configname HighLoadTest
+attr datetime 20250725-13:16:20
+attr datetimef 20250725-131620
+attr experiment HighLoadTest
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network AdvancedTomahawk6Network
+attr processid 15872
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config description "High load stress test"
+config **.trafficGen[*].trafficIntensity 0.95
+config **.trafficGen[*].burstSize 10MiB
+config **.trafficGen[*].burstInterval 0.5ms
+config network AdvancedTomahawk6Network
+config sim-time-limit 10s
+config seed-set 0
+config output-vector-file results/HighLoadTest-0.vec
+config output-scalar-file results/HighLoadTest-0.sca
+config result-dir results
+config **.switch[*].portConfiguration "\"512x200G\""
+config **.switch[*].serdesConfiguration "\"128x106_25G_PAM4\""
+config **.switch[*].switchingCapacity 102.4Tbps
+config **.switch[*].numPorts 512
+config **.switch[*].bufferSize 64MiB
+config **.switch[*].queuesPerPort 8
+config **.serdes[*].dataRate 106.25Gbps
+config **.serdes[*].latency 50ns
+config **.packetBuffer[*].numQueues 8
+config **.packetBuffer[*].bufferSize 64MiB
+config **.packetBuffer[*].schedulingAlgorithm "\"WRR\""
+config **.packetBuffer[*].aiPriorityQueues 4
+config **.packetBuffer[*].rocevSupport true
+config **.packetBuffer[*].adaptiveBuffering true
+config **.cognitiveRouter.adaptiveRouting true
+config **.cognitiveRouter.congestionControl true
+config **.cognitiveRouter.loadBalancing true
+config **.cognitiveRouter.routingLatency 50ns
+config **.cognitiveRouter.advancedTelemetry true
+config **.cognitiveRouter.dynamicCongestionControl true
+config **.cognitiveRouter.rapidFailureDetection true
+config **.cognitiveRouter.packetTrimming true
+config **.trafficGen[*].workloadType "\"AllReduce\""
+config **.trafficGen[*].trafficIntensity 0.8
+config **.trafficGen[*].burstSize 1MiB
+config **.trafficGen[*].burstInterval 1ms
+config **.trafficGen[*].rocevProtocol true
+config **.trafficGen[*].flowSize 10MiB
+config **.trafficGen[*].tensorSize 100MiB
+config **.trafficGen[*].batchSize 64
+config **.trafficGen[*].numGPUs 8
+config **.trafficGen[*].computeToCommRatio 10.0
+
+vector 0 AdvancedTomahawk6Network.switch "Queue Length" ETV
+vector 1 AdvancedTomahawk6Network.switch "Port Utilization" ETV
+vector 2 AdvancedTomahawk6Network.sink[1] Latency ETV
+vector 3 AdvancedTomahawk6Network.sink[2] Latency ETV
+vector 4 AdvancedTomahawk6Network.sink[1] Throughput ETV
+vector 5 AdvancedTomahawk6Network.sink[3] Latency ETV
+vector 6 AdvancedTomahawk6Network.sink[2] Throughput ETV
+vector 7 AdvancedTomahawk6Network.sink[0] Latency ETV
+vector 8 AdvancedTomahawk6Network.sink[0] Throughput ETV
+vector 9 AdvancedTomahawk6Network.sink[3] Throughput ETV
+0	2828 811857 2 98303 0.005939321521 8.544879046014 32768 0 0 0 0
+1	814685 1299744 2 98303 0.005939321521 8.544879046014 32768 0.026307718726379 0.44948651175567 14465.902020813 6391.5627776181
+0	2114429 142465 98305 114877 8.544915405592 9.99969739726 5525 0 0 0 0
+1	2256894 224724 98305 114877 8.544915405592 9.99969739726 5525 0.44721732351651 0.44897009321038 2475.8254698446 1109.4510157965
+2	2481618 317888 3 114870 0.006095571521 9.999524854964 9371 0.00015625 0.00015625 1.4642187500002 0.00022878417968748
+3	2799506 330226 6 114879 0.006413726548 9.99977552226 9734 7.8125e-05 7.8125e-05 0.7604687500001 5.9411621093744e-05
+4	3129732 363668 9 114870 0.007067385344 9.999524854964 9370 1384377924.4322 7.41083285904e+14 2.5467230639699e+15 7.8922186026191e+29
+5	3493400 325522 12 114875 0.007592954285 9.999695457393 9598 0.00015625 0.00015625 1.4996875000002 0.00023432617187498
+6	3818922 377733 20 114879 0.008467984796 9.99977552226 9733 738834160.55112 1.0070379870841e+14 7.1909078555611e+14 1.3082315070853e+28
+7	4196655 325322 24 114878 0.008676516697 9.999707068183 9590 7.8125e-05 7.8125e-05 0.74921875000009 5.8532714843745e-05
+8	4521977 372139 27 114878 0.009187177922 9.999707068183 9589 710466965.8094 1.8504263382283e+15 2.8062109605908e+15 3.4732756817191e+30
+9	4894116 372451 38 114875 0.009570811184 9.999695457393 9597 1450649981.0854 2.4505959849435e+14 1.8165787398498e+15 1.3564423660916e+29
+

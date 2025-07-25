@@ -78,6 +78,37 @@ class Tomahawk6Analyzer:
                         if len(parts) >= 3:
                             # Split remainder by quotes to handle metric names with spaces
                             remainder = parts[2]
+                            
+                            # Extract AI-specific metrics
+                            module = parts[1]
+                            if 'AI Packets Sent' in remainder:
+                                try:
+                                    value = float(remainder.split('"')[2].strip())
+                                    if 'ai_packets_sent' not in results['scalars']:
+                                        results['scalars']['ai_packets_sent'] = 0
+                                    results['scalars']['ai_packets_sent'] += value
+                                except (IndexError, ValueError):
+                                    pass
+                            elif 'AI Packets Received' in remainder:
+                                try:
+                                    value = float(remainder.split('"')[2].strip())
+                                    if 'ai_packets_received' not in results['scalars']:
+                                        results['scalars']['ai_packets_received'] = 0
+                                    results['scalars']['ai_packets_received'] += value
+                                except (IndexError, ValueError):
+                                    pass
+                            elif 'Packets Forwarded' in remainder:
+                                try:
+                                    value = float(remainder.split('"')[2].strip())
+                                    results['scalars']['packets_forwarded'] = value
+                                except (IndexError, ValueError):
+                                    pass
+                            elif 'Average Utilization' in remainder:
+                                try:
+                                    value = float(remainder.split('"')[2].strip())
+                                    results['scalars']['switch_utilization'] = value
+                                except (IndexError, ValueError):
+                                    pass
                             if '"' in remainder:
                                 # Handle quoted metric names
                                 quote_start = remainder.find('"')
@@ -191,19 +222,41 @@ class Tomahawk6Analyzer:
         tomahawk6_capacity_tbps = 102.4
         tomahawk6_capacity_gbps = tomahawk6_capacity_tbps * 1000
         
+        # Get AI-specific metrics if available
+        config_data = self.results.get(config_name, {})
+        scalars = config_data.get('scalars', {})
+        
+        # Check for AI traffic metrics
+        ai_packets_sent = scalars.get('ai_packets_sent', 0)
+        ai_packets_received = scalars.get('ai_packets_received', 0)
+        packets_forwarded = scalars.get('packets_forwarded', 0)
+        switch_utilization = scalars.get('switch_utilization', 0)
+        
         # Calculate utilization
         utilization = (throughput_gbps / tomahawk6_capacity_gbps) * 100
         
         print(f"  Switch Capacity:   {tomahawk6_capacity_tbps} Tbps ({tomahawk6_capacity_gbps:,.0f} Gbps)")
         print(f"  Current Utilization: {utilization:.6f}%")
         
+        # Show AI-specific metrics if this is an advanced network
+        if ai_packets_sent > 0:
+            print(f"\nAI Workload Analysis:")
+            print(f"  AI Packets Generated: {ai_packets_sent:,.0f}")
+            print(f"  AI Packets Delivered: {ai_packets_received:,.0f}")
+            print(f"  AI Packet Loss Rate:  {((ai_packets_sent - ai_packets_received) / ai_packets_sent * 100):.2f}%")
+            print(f"  Switch Packets Forwarded: {packets_forwarded:,.0f}")
+            if switch_utilization > 0:
+                print(f"  Switch Hardware Utilization: {switch_utilization * 100:.1f}%")
+        
         # Performance rating
-        if utilization > 80:
-            rating = "EXCELLENT - High utilization"
-        elif utilization > 50:
-            rating = "GOOD - Moderate utilization"
-        elif utilization > 10:
-            rating = "FAIR - Low utilization"
+        if switch_utilization > 0.8:
+            rating = "EXCELLENT - High AI workload utilization"
+        elif switch_utilization > 0.5:
+            rating = "GOOD - Moderate AI workload utilization"
+        elif switch_utilization > 0.1:
+            rating = "FAIR - Low AI workload utilization"
+        elif ai_packets_sent > 0:
+            rating = "AI WORKLOAD - Low utilization but AI traffic active"
         else:
             rating = "BASELINE - Test traffic only"
             

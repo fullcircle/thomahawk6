@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for tomahawk6
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -I/mnt/d/omnetpp-6.2.0/inet4.5/src -L/mnt/d/omnetpp-6.2.0/inet4.5/src -lINET
+#  opp_makemake -f --deep -X backup -I/mnt/d/omnetpp-6.2.0/inet4.5/src -L/mnt/d/omnetpp-6.2.0/inet4.5/src -lINET_dbg
 #
 
 # Name of target to be created (-o option)
@@ -23,7 +23,7 @@ INCLUDE_PATH = -I/mnt/d/omnetpp-6.2.0/inet4.5/src
 EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS = $(LDFLAG_LIBPATH)/mnt/d/omnetpp-6.2.0/inet4.5/src  -lINET
+LIBS = $(LDFLAG_LIBPATH)/mnt/d/omnetpp-6.2.0/inet4.5/src  -lINET_dbg
 
 # Output directory
 PROJECT_OUTPUT_DIR = out
@@ -32,14 +32,15 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
 OBJS = \
+    $O/AdvancedSink.o \
+    $O/AdvancedTrafficGen.o \
+    $O/AITrafficGenerator.o \
+    $O/CognitiveRouter.o \
+    $O/PacketBuffer.o \
+    $O/SerDesCore.o \
+    $O/SimpleSwitch.o \
     $O/TrafficSink.o \
-    $O/TrafficSource.o \
-    $O/backup/AITrafficGenerator.o \
-    $O/backup/CognitiveRouter.o \
-    $O/backup/PacketBuffer.o \
-    $O/backup/SerDesCore.o \
-    $O/backup/SimpleSink.o \
-    $O/backup/SimpleTrafficGen.o
+    $O/TrafficSource.o
 
 # Message files
 MSGFILES =
