@@ -161,15 +161,35 @@ class Tomahawk6Analyzer:
             config = data['config']
             
             
-            # Extract key metrics (handle different possible module naming patterns)
-            packets_sent = (scalars.get('BasicTomahawk6Test.source.Packets Sent', 0) or
+            # Extract key metrics (handle both basic and AI traffic patterns)
+            # First check for AI traffic metrics
+            ai_packets_sent = scalars.get('ai_packets_sent', 0)
+            ai_packets_received = scalars.get('ai_packets_received', 0)
+            
+            # Fall back to basic traffic metrics if AI metrics not found
+            packets_sent = ai_packets_sent or (scalars.get('BasicTomahawk6Test.source.Packets Sent', 0) or
                           scalars.get('source.Packets Sent', 0))
-            packets_received = (scalars.get('BasicTomahawk6Test.sink.Packets Received', 0) or
+            packets_received = ai_packets_received or (scalars.get('BasicTomahawk6Test.sink.Packets Received', 0) or
                               scalars.get('sink.Packets Received', 0))
-            total_bytes = (scalars.get('BasicTomahawk6Test.sink.Total Bytes', 0) or
-                         scalars.get('sink.Total Bytes', 0))
-            throughput = (scalars.get('BasicTomahawk6Test.sink.Throughput (bytes/sec)', 0) or
-                        scalars.get('sink.Throughput (bytes/sec)', 0))
+            
+            # Calculate total bytes from AI sink data if available
+            total_bytes = 0
+            throughput = 0
+            
+            # For AI networks, sum up all sink data
+            if ai_packets_sent > 0:
+                # Sum bytes from all AI sinks
+                for key, value in scalars.items():
+                    if 'Total Bytes' in key and 'sink' in key.lower():
+                        total_bytes += value
+                    elif 'Average Throughput' in key and 'sink' in key.lower():
+                        throughput += value
+            else:
+                # Basic network metrics
+                total_bytes = (scalars.get('BasicTomahawk6Test.sink.Total Bytes', 0) or
+                             scalars.get('sink.Total Bytes', 0))
+                throughput = (scalars.get('BasicTomahawk6Test.sink.Throughput (bytes/sec)', 0) or
+                            scalars.get('sink.Throughput (bytes/sec)', 0))
             
             # Calculate derived metrics
             packet_loss_rate = 0
