@@ -1,0 +1,56 @@
+# OMNeT++ Build Files
+out/
+*.o
+*.so
+*.dll
+*.exe
+*_dbg
+*_release
+Makefile.local
+
+# OMNeT++ Results
+results/*.vec
+results/*.sca
+results_archive/
+*.anf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Analysis Output
+results/performance_analysis.png
+results/analysis_report.txt
+results/simulation_metrics.csv
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Backup Files
+*.backup
+*.bak
+backup/
+
+# Log Files
+*.log
+
+# Temporary Files
+*.tmp
+*.temp
